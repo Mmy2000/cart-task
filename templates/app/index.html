@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="main-product">
+   <div class="container">
+      <div class="row clearfix">
+         
+         <div  class="find-box"  >
+
+            <h1>Find your next product with us</h1>
+            <h4>It has never been easier.</h4>
+            {% comment %} <div class="product-sh">
+               <div class="col-sm-6">
+                  <div class="form-sh">
+                     <input type="text" placeholder="Search something you love" >
+                  </div>
+               </div>
+                <div class="col-sm-3">
+                  <div class="form-sh">
+                     <select class="selectpicker">
+                        <option>Textiles</option>
+                        <option>Furniture</option>
+                        <option>Leather</option>
+                     </select>
+                  </div>
+               </div> 
+               <div class="col-sm-3">
+                  <div class="form-sh"> <a class="btn" href="#">Search</a> </div>
+               </div> <br> <br>
+               <!-- <p>Or simply<a href="#"> click here </a> and get inspired!</p> -->
+            </div> {% endcomment %}
+         </div>
+      </div>
+      <div class="row clearfix">
+         <div class="row">
+            {% for category in categories %}
+            <div class="col-lg-3 col-sm-6 col-md-3">
+                  <a href="{% url 'category' category.slug %}">
+                     <div class="box-img">
+                        <h4>{{ category.name }}</h4>
+                        <img src="
+                        {% if category.image %}
+                           {{ category.image.url }}
+                        {% endif %}" 
+                        alt="{{ category.name }}" />
+                     
+                     </div>
+                  </a>
+            </div>
+            {% endfor %}
+         </div>
+         
+         <div class="categories_link">
+            <a href="#">Browse all categories here</a>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}
+
+
+
