@@ -92,95 +92,60 @@
                      <ul>
                         <li class="clearfix">
                            <div class="col-md-4">
-                              <h5>Measurments</h5>
+                              <h5>dimintions</h5>
                            </div>
                            <div class="col-md-8">
-                              <p>H25 cm / 0 12 cm and H 24 cm / 0 25 cm</p>
+                              <p>{{ product.size.dimensions }}</p>
                            </div>
                         </li>
                         <li class="clearfix">
                            <div class="col-md-4">
-                              <h5>Material</h5>
+                              <h5>texture</h5>
                            </div>
                            <div class="col-md-8">
-                              <p>Material Name</p>
+                              <p>{{ product.texture }}</p>
                            </div>
                         </li>
                         <li class="clearfix">
                            <div class="col-md-4">
-                              <h5>Wire</h5>
+                              <h5>Factory</h5>
                            </div>
                            <div class="col-md-8">
-                              <p>Wire Name</p>
+                              <p>product.factory.name</p>
                            </div>
                         </li>
-                        <li class="clearfix">
-                           <div class="col-md-4">
-                              <h5>Comdition</h5>
-                           </div>
-                           <div class="col-md-8">
-                              <p>Brand new</p>
-                           </div>
-                        </li>
-                        <li class="clearfix">
-                           <div class="col-md-4">
-                              <h5>SKU number</h5>
-                           </div>
-                           <div class="col-md-8">
-                              <p>SKU number</p>
-                           </div>
-                        </li>
-                        <li class="clearfix">
-                           <div class="col-md-4">
-                              <h5>Shipping</h5>
-                           </div>
-                           <div class="col-md-8">
-                              <p>Shipping worldwide</p>
-                           </div>
-                        </li>
-                        <li class="clearfix">
-                           <div class="col-md-4">
-                              <h5>Warranty</h5>
-                           </div>
-                           <div class="col-md-8">
-                              <p>1 years</p>
-                           </div>
-                        </li>
-                        <li class="clearfix">
-                           <div class="col-md-4">
-                              <h5>Delivery</h5>
-                           </div>
-                           <div class="col-md-8">
-                              <p>Choose country</p>
-                           </div>
-                        </li>
+                        
                      </ul>
                   </div>
                </div>
             </div>
             <div class="similar-box">
-               <h2>Similiar products from Morgan Mobilya</h2>
+               <h2>Similiar products from {{ product.factory }}</h2>
                <div class="row cat-pd">
+                  {% for product in products %}
                   <div class="col-md-6">
                      <div class="small-box-c">
                         <div class="small-img-b">
-                           <img class="img-responsive" src="{% static 'images/tr1.png' %}" alt="#" />
+                           <a href="{% url 'product_detail' slug=product.slug %}">
+                           <img class="img-responsive" src="{{ product.image.url}}" alt="#" />
+                           </a>
                         </div>
                         <div class="dit-t clearfix">
                            <div class="left-ti">
-                              <h4>Product</h4>
+                              <h4>{{ product.name }}</h4>
                               <p>By <span>Beko</span> under <span>Lights</span></p>
                            </div>
                            <a href="#" tabindex="0">$1220</a>
                         </div>
                         <div class="prod-btn">
-                           <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                           <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           <p>23 likes</p>
+                           <label for="quantity" style="font-size: 12px; margin-right: 5px;">Quantity (meters):</label>
+                           <input type="number" id="quantity-2" name="quantity" min="1" step="1" value="1" style="width: 60px; margin-right: 8px;">
+                           <a href="javascript:void(0);" onclick="addToCart(2)"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a>
                         </div>
                      </div>
                   </div>
-                  <div class="col-md-6">
+                  {% endfor %}
+                  {% comment %} <div class="col-md-6">
                      <div class="small-box-c">
                         <div class="small-img-b">
                            <img class="img-responsive" src="{% static 'images/tr2.png' %}" alt="#" />
@@ -198,48 +163,9 @@
                            <p>23 likes</p>
                         </div>
                      </div>
-                  </div>
+                  </div> {% endcomment %}
                </div>
-               <div class="row cat-pd">
-                  <div class="col-md-6">
-                     <div class="small-box-c">
-                        <div class="small-img-b">
-                           <img class="img-responsive" src="{% static 'images/tr3.png' %}" alt="#" />
-                        </div>
-                        <div class="dit-t clearfix">
-                           <div class="left-ti">
-                              <h4>Product</h4>
-                              <p>By <span>Beko</span> under <span>Lights</span></p>
-                           </div>
-                           <a href="#" tabindex="0">$1220</a>
-                        </div>
-                        <div class="prod-btn">
-                           <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                           <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           <p>23 likes</p>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="small-box-c">
-                        <div class="small-img-b">
-                           <img class="img-responsive" src="{% static 'images/tr4.png' %}" alt="#" />
-                        </div>
-                        <div class="dit-t clearfix">
-                           <div class="left-ti">
-                              <h4>Product</h4>
-                              <p>By <span>Beko</span> under <span>Chairs</span></p>
-                           </div>
-                           <a href="#" tabindex="0">$1220</a>
-                        </div>
-                        <div class="prod-btn">
-                           <a href="#"><i class="fa fa-star" aria-hidden="true"></i> Save to wishlist</a>
-                           <a href="#"><i class="fa fa-thumbs-up" aria-hidden="true"></i> Like this</a>
-                           <p>23 likes</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+               
             </div>
          </div>
          <div class="col-md-3 col-sm-12">
@@ -247,10 +173,8 @@
                <h4>Price</h4>
                <h3>$1.320 <span>pr.peice</span></h3>
                
-               <button onclick="addToCart('{{ product.id }}')" 
-               style="background-color: green; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-           Add To Cart
-       </button>               <label for="quantity" style="font-size: 12px; margin-right: 5px;">Quantity (meters):</label>
+               <a href="javascript:void(0);" onclick="addToCart({{ product.id }})"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Add to cart</a>
+                 <label for="quantity" style="font-size: 12px; margin-right: 5px;">Quantity (meters):</label>
                <input type="number" id="quantity-{{ product.id }}" name="quantity" min="1" step="1" value="1" style="width: 60px; margin-right: 8px;">
             </div>
          </div>
@@ -259,44 +183,3 @@
 </div>
 {% endblock content %}
 
-{% block additional_js %}
-<script> 
-
-   function addToCart(productId) {
-      const quantityInput = document.getElementById(`quantity-${productId}`);
-      const quantity = quantityInput ? parseInt(quantityInput.value, 10) || 1 : 1;
-  
-      fetch(`/cart/add_to_cart/${productId}/?quantity=${quantity}`, {
-          method: "GET",
-          headers: {
-              "Content-Type": "application/json",
-          },
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.message) {
-              // Update cart count in the navbar dynamically
-              const cartCountElement = document.querySelector(".cart-count");
-              const productCount = Object.keys(data.cart).length; // Count distinct products in the cart
-  
-              if (cartCountElement) {
-                  cartCountElement.textContent = productCount; // Update with the number of distinct products
-              }
-  
-              // Add animation class to the cart icon
-              const cartButton = document.querySelector(".cart-button");
-              if (cartButton) {
-                  cartButton.classList.add("cart-animate");
-                  // Remove the animation class after the animation ends
-                  setTimeout(() => cartButton.classList.remove("cart-animate"), 1000); // Match this with animation duration
-              }
-          }
-      })
-      .catch(error => {
-          console.error("Error adding to cart:", error);
-      });
-  }
-      
-
-</script>
-{% endblock additional_js %}

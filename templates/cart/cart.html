@@ -36,7 +36,7 @@
       </table>
       <div class="cart-summary">
         <p>Total Items: <strong>{{ total_quantity }}</strong></p>
-        <p>Grand Total: <strong>${{ grand_total }}</strong></p>
+        <p >Grand Total: <strong class="grand-total">${{ grand_total }}</strong></p>
       </div>
     {% else %}
       <p class="empty-cart">Your cart is empty.</p>
@@ -51,76 +51,4 @@
   <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
 {% endblock %}
 
-{% block additional_js %}
-  <script>
-    
-    function addToCart(productId, quantity = 1) {
-      fetch(`/cart/add/${productId}/?quantity=${quantity}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.message) {
-            alert(data.message);
-            updateCartSummary(data.total_quantity);
-          } else if (data.error) {
-            alert(data.error);
-          }
-        })
-        .catch(error => console.error("Error:", error));
-    }
 
-    document.querySelectorAll(".remove-item").forEach(button => {
-      button.addEventListener("click", function () {
-        const productId = this.dataset.productId;
-        const csrfToken = document.getElementById("csrf-token").value;
-
-        fetch(`/cart/remove/${productId}/`, {
-          method: "POST",
-          headers: { "X-CSRFToken": csrfToken },
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.message) {
-              alert(data.message);
-              document.querySelector(`tr[data-product-id="${productId}"]`).remove();
-              updateCartSummary(data.total_quantity);
-            } else if (data.error) {
-              alert(data.error);
-            }
-          })
-          .catch(error => console.error("Error:", error));
-      });
-    });
-
-    document.getElementById("clear-cart").addEventListener("click", function () {
-      if (confirm("Are you sure you want to clear the cart?")) {
-        const csrfToken = document.getElementById("csrf-token").value;
-
-        fetch("/cart/clear/", {
-          method: "POST",
-          headers: { "X-CSRFToken": csrfToken },
-        })
-          .then(response => response.json())
-          .then(data => {
-            if (data.message) {
-              alert(data.message);
-              document.querySelector("tbody").innerHTML = "";
-              updateCartSummary(0);
-            } else if (data.error) {
-              alert(data.error);
-            }
-          })
-          .catch(error => console.error("Error:", error));
-      }
-    });
-
-    function updateCartSummary(totalQuantity) {
-      const summaryElement = document.querySelector(".cart-summary");
-      if (totalQuantity > 0) {
-        summaryElement.querySelector("strong").innerText = totalQuantity;
-        summaryElement.style.display = "block";
-      } else {
-        summaryElement.style.display = "none";
-      }
-    }
-  </script>
-{% endblock %}

@@ -44,6 +44,7 @@ def add_to_cart(request, product_id):
 
     total_quantity = len(cart.get_items())
     request.session["cart_total_quantity"] = total_quantity
+    print(request.session["cart_total_quantity"])
 
     return JsonResponse({
         "message": "Product added to cart successfully!",
@@ -56,11 +57,14 @@ def remove_from_cart(request, product_id):
     try:
         cart.remove(product_id)
         total_quantity = sum(item["quantity"] for item in cart.get_items())
+        grand_total = sum(Decimal(item["price"]) * item["quantity"] for item in cart.get_items())
+
         request.session["cart_total_quantity"] = total_quantity
 
         return JsonResponse({
             "message": "Product removed from cart",
             "total_quantity": total_quantity,
+            "grand_total": f"{grand_total:.2f}",
         })
     except KeyError:
         return JsonResponse({"error": "Product not found in cart"}, status=404)
@@ -73,4 +77,8 @@ def clear_cart(request):
 
     request.session["cart_total_quantity"] = 0
 
-    return JsonResponse({"message": "Cart cleared successfully", "total_quantity": 0})
+    return JsonResponse({
+        "message": "Cart cleared successfully",
+        "total_quantity": 0,
+        "grand_total": "0.00",
+    })
