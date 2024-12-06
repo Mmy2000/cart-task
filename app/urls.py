@@ -9,5 +9,6 @@ urlpatterns = [
     # path("testBase/", views.testBase, name="testBase"),
     # path("testTemp/", views.testTemp, name="testTemp"),
     path('filter-by-color/', views.filter_by_color, name='filter_by_color'),
+    path('filter-products/', views.filter_products, name='filter_products'),
 
 ]

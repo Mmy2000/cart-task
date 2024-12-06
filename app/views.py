@@ -56,3 +56,29 @@ def filter_by_color(request):
             return JsonResponse({'products': product_data})
         else:
             return JsonResponse({'error': 'No color code provided'}, status=400)
+        
+def filter_products(request):
+    factory_ids = request.GET.getlist('factories[]')  # Multiple factory IDs
+    color_codes = request.GET.getlist('colors[]')    # Multiple color codes
+
+    products = Product.objects.all()
+
+    if factory_ids:
+        products = products.filter(factory__id__in=factory_ids)
+    if color_codes:
+        products = products.filter(color__color_code__in=color_codes)
+
+    # Serialize data for JSON response
+    products_data = [
+        {
+            'id': product.id,
+            'name': product.name,
+            'image': product.image.url if product.image else None,
+            'price': product.price,
+            'slug': product.slug,
+            'factory': product.factory.name if product.factory else None,
+            'type': product.type.name if product.type else None,
+        }
+        for product in products
+    ]
+    return JsonResponse({'products': products_data})

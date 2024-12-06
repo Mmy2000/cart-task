@@ -165,12 +165,17 @@ $(document).ready(function () {
 function updateCartSummary(totalQuantity, grandTotal) {
     const summaryElement = document.querySelector(".cart-summary");
     const grandTotalElement = summaryElement.querySelector("strong:last-child");
+    console.log(totalQuantity);
+    
 
     if (totalQuantity > 0) {
-        summaryElement.querySelector("strong").innerText = totalQuantity;
+        console.log(totalQuantity);
+        
+        summaryElement.querySelector(".cart-summary .item-quantity").innerText = totalQuantity;
         grandTotalElement.innerText = `$${grandTotal}`;
         summaryElement.style.display = "block";
     } else {
         summaryElement.style.display = "none";
     }
 }
+
