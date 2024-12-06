@@ -162,6 +162,7 @@
             <div class="row top-filter-row">
               <div class="categories-top-filter-container">
                 <div class="col first-col">
+                  {% comment %}
                   <button class="btn sort-button">
                     <img
                       src="{% static './images/arrows-alt-v-solid.svg' %}"
@@ -179,6 +180,16 @@
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </select>
+                  {% endcomment %}
+                  <div class="selected-filters">
+                    <h4>Selected Filters</h4>
+                    <div class="selected-filters-div" id="selected-filters-container">
+                      <!-- Selected filters will be added here dynamically -->
+                    </div>
+                    <button id="reset-filters" class="btn btn-danger ">
+                      Reset All Filters
+                    </button>
+                  </div>
                 </div>
                 <div class="col">
                   <!-- products count -->
@@ -248,7 +259,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>

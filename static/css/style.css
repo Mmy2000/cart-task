@@ -3553,3 +3553,7 @@ html .ui-button.ui-state-disabled:active {
 	height: 60px;
 	border-radius: 50%;
 }
+
+.selected-filters-div{
+	padding: 10px 0;
+}
